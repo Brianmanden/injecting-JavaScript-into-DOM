@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Experiments in injecting external JavaScript into Dom</title>
+	</head>
+	<body>
+		<script>console.log("-123-");</script>
+		<script>
+			window.onload = function(){
+				// Find the script in the document
+				const theScripts = document.scripts;
+				// Number of scripts in the document
+				const numberOfScripts = theScripts.length;
+				
+				// Create a script element
+				const importedScript = document.createElement('script');
+				// Set the source of the created script element
+				importedScript.src = './scripts/script.js';
+				
+				// Append the created script element after the last script
+				theScripts[numberOfScripts-1].parentNode.appendChild(importedScript)
+				
+				// Log all the scripts
+				console.dir(theScripts);
+			}
+		</script>
+		<script>console.log("-456-");</script>
+	</body>
+</html>
